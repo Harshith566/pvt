@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forever Love 💖</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Segoe UI',sans-serif;
+  background:radial-gradient(circle at top,#ff758f,#2b1055,#000);
+}
+.slide{
+  display:none;
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  width:90%;
+  max-width:360px;
+}
+.slide.active{display:block;}
+button{
+  margin:8px;
+  padding:10px 22px;
+  border:none;
+  border-radius:20px;
+  background:#e63946;
+  color:white;
+  font-size:16px;
+}
+.note{display:none;color:#e63946;margin-top:10px;}
+.glow{color:#e63946;font-weight:700;}
+</style>
+</head>
+
+<body>
+
+<audio id="bgm" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_4e1fc5cba5.mp3">
+</audio>
+
+<!-- LOCK -->
+<div id="lock" class="slide active">
+  <h2>Private for Gubbe 💖</h2>
+  <input id="pass" placeholder="Enter password ❤️">
+  <br><br>
+  <button onclick="unlock()">Unlock 🔐</button>
+</div>
+
+<!-- SLIDES -->
+<div id="slides">
+
+  <div class="slide" id="s1">
+    <h2>Hey Gubbe ❤️</h2>
+    <p>Can I hold your hand today, tomorrow, and forever?</p>
+    <button onclick="next('s1','s2')">YES 💖</button>
+    <button onclick="showNote()">NO 💔</button>
+    <div class="note" id="note">Think again pweasee 🥺👉👈</div>
+  </div>
+
+  <div class="slide" id="s2">
+    <h2 class="glow">You are my favorite notification 💌</h2>
+    <p>The one I wait for, the one that makes me smile instantly.</p>
+    <button onclick="next('s2','s3')">Next 💕</button>
+  </div>
+
+  <div class="slide" id="s3">
+    <h2>Little Poem for You ✨</h2>
+    <p>
+      In chaos you are my calm,<br>
+      In silence you are my song,<br>
+      With you is where I belong.
+    </p>
+    <button onclick="next('s3','s4')">Next 💗</button>
+  </div>
+
+  <div class="slide" id="s4">
+    <h2>My Feelings 💞</h2>
+    <p id="typing"></p>
+    <button onclick="next('s4','s5'); typeText();">Next ❤️</button>
+  </div>
+
+  <div class="slide" id="s5">
+    <h2 class="glow">Promise Me This 💍</h2>
+    <p>Stay with me, laugh with me, grow old with me.</p>
+    <button onclick="next('s5','s6')">I Promise 💖</button>
+  </div>
+
+  <div class="slide" id="s6">
+    <h2>Final Question 🥺</h2>
+    <p>Will you be mine forever, Gubbe?</p>
+    <button onclick="next('s6','s7')">YES FOREVER 💍❤️</button>
+  </div>
+
+  <div class="slide" id="s7">
+    <h2 class="glow">I love you so much Gubbe 💕</h2>
+    <p>You are my today, tomorrow, and always.</p>
+  </div>
+
+</div>
+
+<script>
+function unlock(){
+  if(document.getElementById("pass").value === "myhoneypie"){
+    document.getElementById("lock").classList.remove("active");
+    showSlide("s1");
+    document.getElementById("bgm").play();
+  } else {
+    alert("Wrong password 💔");
+  }
+}
+
+function showSlide(id){
+  const slides=document.querySelectorAll(".slide");
+  slides.forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+
+  // If it's the feelings slide, start typing automatically
+  if(id === "s4"){
+    typeText();
+  }
+}
+
+function next(hide,show){
+  showSlide(show);
+}
+
+function showNote(){
+  document.getElementById("note").style.display="block";
+}
+
+function typeText(){
+  let text="Every time my phone lights up, I hope it's you. Every time I smile for no reason, it's because of you. You are my peace, my happiness, my Gubbe 💕";
+  let el=document.getElementById("typing");
+  el.innerHTML="";
+  let i=0;
+  let t=setInterval(()=>{
+    el.innerHTML+=text.charAt(i++);
+    if(i>=text.length) clearInterval(t);
+  },35);
+}
+</script>
+
+
+</body>
+</html>
